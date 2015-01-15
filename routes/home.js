@@ -1,7 +1,12 @@
 module.exports = function(app) {
-	var home = app.controllers.home;
-	app.get('/', home.index);
 
-	var cadastro = app.controllers.cadastro;
-	app.get('/cadastro', cadastro.index);
+	console.log("Rota home ok");
+	var home = app.controllers.home;
+
+	var bodyParser = require('body-parser');
+	var urlencodedParser = bodyParser.urlencoded({ extended: false });
+	
+	app.get('/', home.index);
+	app.post('/entrar', urlencodedParser, home.login);
+	app.get('/sair', home.logout);
 };
