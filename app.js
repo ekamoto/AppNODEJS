@@ -8,7 +8,7 @@ console.log("\nCarregando:");
 var cookieParser = require('cookie-parser');
 app.use(cookieParser('ntalk'));
 
-// Session
+// Session tem que instalar
 var session = require('express-session');
 app.use(session({
   secret: 'keyboard cat',
@@ -16,6 +16,12 @@ app.use(session({
   saveUninitialized: false,
   cookie: { secure: false }
 }));
+
+// Method-override
+var methodOverride = require('method-override');
+app.use(methodOverride('X-HTTP-Method'))          // Microsoft
+app.use(methodOverride('X-HTTP-Method-Override')) // Google/GData
+app.use(methodOverride('X-Method-Override'))      // IBM
 
 load('models')
 .then('controllers')
